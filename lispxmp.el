@@ -394,7 +394,7 @@ http://mumble.net/~campbell/emacs/paredit.el"
 (defmacro lispxmp-comment-advice (func)
   `(defadvice ,func (around lispxmp-hack activate)
      ,(format "If `%s' is successively called, add => mark." func)
-     (if (and (eq major-mode 'emacs-lisp-mode)
+     (if (and (derived-mode-p 'emacs-lisp-mode 'lisp-mode)
               (eq last-command ',func)
               (not (member "=>" (list (ignore-errors (buffer-substring (- (point) 2) (point)))
                                       (ignore-errors (buffer-substring (point) (+ (point) 2)))))))
